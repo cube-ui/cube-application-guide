@@ -22,8 +22,5 @@ export default {
 }
 </script>
 
-<style>
-.match-list {
-
-}
+<style lang="stylus">
 </style>

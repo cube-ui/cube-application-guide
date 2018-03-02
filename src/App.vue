@@ -55,35 +55,25 @@ export default {
 }
 </script>
 
-<style>
-html, body, #app {
+<style lang="stylus">
+html, body, #app
   height: 100%
-}
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-.content {
-  height: calc(100% - 85px);
-  overflow: hidden;
-}
-.header {
-  height: 44px;
-  line-height: 44px;
-  background-color: #ea3b32;
-  color: white;
-}
-.tab-list {
-  height: 40px;
-  line-height: 44px;
-  display: flex;
-  justify-content: space-around;
-  border-bottom: solid 1px #f0f0f1;
-}
-.active {
-  color: orange;
-}
+  text-align: center
+#app 
+  .header
+    height: 44px
+    line-height: 44px
+    background-color: #ea3b32
+    color: white
+  .tab-list
+    height: 40px
+    line-height: 44px
+    display: flex
+    justify-content: space-around
+    border-bottom: solid 1px #f0f0f1
+  .content
+    height: calc(100% - 85px)
+    overflow: hidden
+  .active
+    color: orange
 </style>
