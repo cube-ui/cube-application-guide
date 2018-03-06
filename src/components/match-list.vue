@@ -1,12 +1,21 @@
 <template>
   <div class="match-list">
     <cube-scroll
-      :data="matchList">
+      :data="matchList" :options="options">
       <ul>
         <li v-for="(item, index) in matchList" :key="index" class="match-item">
           <div class="left-team">
             <img :src="item.hostLogoUrl" alt="" class="logo">
             <p class="name">{{item.hostTeamName}}</p>
+          </div>
+          <div class="center">
+            <p class="guest" :class="{end : item.isEnd}">{{item.guest}}</p>
+            <p class="score">{{item.hostScore}} - {{item.guestScore}}</p>
+            <p classs="time">{{item.endTime}}</p>
+          </div>
+          <div class="right-team">
+            <img :src="item.guestLogoUrl" alt="" class="logo">
+            <p class="name">{{item.guestTeamName}}</p>
           </div>
         </li>
       </ul>
@@ -15,62 +24,22 @@
 </template>
 
 <script>
+import List from '../common/data/match-list'
 export default {
   name: 'match-list',
   data () {
     return {
-      matchList: [
-        {
-          'hostTeamName': '太阳',
-          'hostLogoUrl': 'https://rl.aicai.com/images/pages/leaguelib/team_logo/tm_logo_84.png',
-          'gustTeamName': '老鹰',
-          'gustLogoUrl': 'https://rl.aicai.com/images/pages/leaguelib/team_logo/tm_logo_91.png',
-          'hostScore': 2,
-          'gestScore': 1,
-          'endTime': '1小时24分钟后',
-          'gust': true
+      matchList: List.list,
+      options: {
+        scrollbar: {
+          fade: true
         },
-        {
-          'hostTeamName': '步行者',
-          'hostLogoUrl': 'https://rl.aicai.com/images/pages/leaguelib/team_logo/tm_logo_225.png',
-          'gustTeamName': '奇才',
-          'gustLogoUrl': 'https://rl.aicai.com/images/pages/leaguelib/team_logo/tm_logo_233.png',
-          'hostScore': 2,
-          'gestScore': 1,
-          'endTime': '1小时24分钟后',
-          'gust': true
-        },
-        {
-          'hostTeamName': '骑士',
-          'hostLogoUrl': 'https://rl.aicai.com/images/pages/leaguelib/team_logo/tm_logo_1935.png',
-          'gustTeamName': '公牛',
-          'gustLogoUrl': 'https://rl.aicai.com/images/pages/leaguelib/team_logo/tm_logo_456.png',
-          'hostScore': 2,
-          'gestScore': 1,
-          'endTime': '1小时24分钟后',
-          'gust': true
-        },
-        {
-          'hostTeamName': 'Serect',
-          'hostLogoUrl': 'https://rl.aicai.com/images/pages/leaguelib/team_logo/tm_logo_466.png',
-          'gustTeamName': 'VGJ.T',
-          'gustLogoUrl': 'https://rl.aicai.com/images/pages/leaguelib/team_logo/tm_logo_927.png',
-          'hostScore': 2,
-          'gestScore': 1,
-          'endTime': '1小时24分钟后',
-          'gust': true
-        },
-        {
-          'hostTeamName': '凯尔特人',
-          'hostLogoUrl': 'https://rl.aicai.com/images/pages/leaguelib/team_logo/tm_logo_7344.png',
-          'gustTeamName': '灰熊',
-          'gustLogoUrl': 'https://rl.aicai.com/images/pages/leaguelib/team_logo/tm_logo_2817.png',
-          'hostScore': 2,
-          'gestScore': 1,
-          'endTime': '1小时24分钟后',
-          'gust': true
+        pullDownRefresh: {
+          threshold: 90,
+          stop: 40,
+          txt: 'Refresh success'
         }
-      ]
+      }
     }
   }
 }
@@ -78,11 +47,14 @@ export default {
 
 <style lang="stylus">
 .match-list
+  height: 618px
   .match-item
     border-bottom: 1px solid #f0f0f1
     padding: 10px 0
-    .left-team
+    display: flex
+    .left-team,.right-team
       text-align: center
+      flex: 1
       img
         display: inline-block
         width: 35px
@@ -90,4 +62,21 @@ export default {
         margin-bottom: 4px
       .name 
         font-size: 14px
+    .center
+      flex-basis: 50%
+      font-size: 12px
+      .guest
+        display: inline-block
+        background-color: green
+        color: white
+        line-height: 16px
+        padding: 3px 10px
+        border-radius: 25px
+        margin-bottom: 5px
+      .end
+        background-color: red
+      .score
+        font-size: 14px
+        font-weight: 500
+        margin-bottom: 5px
 </style>
