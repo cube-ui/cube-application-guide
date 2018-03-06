@@ -5,20 +5,21 @@
       <div class="navigator">
         <ul class="nav-list">
           <li v-for="(item, index) in tabList" :key="index"
-            @click="switchTab(index)" :class="{'active': currentPage === index}">
+            @click="switchTab(index)" :class="{active: currentPage === index}">
             {{ item }}
           </li>
         </ul>
-        <div class="triangle-up left"></div>
+        <div class="triangle-up" :class="{left: currentPage === 0, right: currentPage === 2}"></div>
       </div>
     </div>
     <div class="content">
       <cube-slide
         :data="tabList"
+        :initialIndex="currentPage"
         :loop="false"
         :autoPlay="false"
         :threshold="0.1"
-        @change="slideChange()"
+        @change="slideChange"
         >
         <cube-slide-item v-for="(item, index) in tabList" :key="index">
           <div class="match-list-wrapper">
@@ -48,10 +49,8 @@ export default {
   methods: {
     switchTab (index) {
       this.currentPage = index
-      console.log(index)
     },
     slideChange (index) {
-      console.log(index)
       this.currentPage = index
     }
   }
@@ -73,7 +72,7 @@ html, body, #app
       color: white
     .navigator
       position: relative
-      padding: 12px 0
+      padding-bottom: 12px
       border-bottom: solid 1px #f0f0f1
       font-size: 12px
       .nav-list
@@ -94,7 +93,7 @@ html, body, #app
       border-left: 7px solid transparent
       border-right: 7px solid transparent
       border-bottom: 8px solid #E0E4E8
-      transition: all 0.3
+      transition: all 0.4s
       &.left
         left: 16.67%
       &.right
