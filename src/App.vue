@@ -1,13 +1,16 @@
 <template>
   <div id="app">
-    <div class="header">NBA</div>
-    <div class="navigator">
-      <ul class="tab-list">
-        <li v-for="(item, index) in tabList" :key="index"
-          @click="switchTab(index)" :class="{'active': currentPage === index}">
-          {{ item }}
-        </li>
-      </ul>
+    <div class="header">
+      <div class="title">全部赛事</div>
+      <div class="navigator">
+        <ul class="nav-list">
+          <li v-for="(item, index) in tabList" :key="index"
+            @click="switchTab(index)" :class="{'active': currentPage === index}">
+            {{ item }}
+          </li>
+        </ul>
+        <div class="triangle-up left"></div>
+      </div>
     </div>
     <div class="content">
       <cube-slide
@@ -36,7 +39,7 @@ export default {
   data () {
     return {
       currentPage: 1,
-      tabList: ['已结束', '未结束', '我的关注']
+      tabList: ['已结束', '直播中', '我的关注']
     }
   },
   components: {
@@ -59,21 +62,45 @@ export default {
 html, body, #app
   height: 100%
   text-align: center
-#app 
+#app
+  background-color: #E0E4E8
   .header
-    height: 44px
-    line-height: 44px
-    background-color: #ea3b32
     color: white
-  .tab-list
-    height: 40px
-    line-height: 44px
-    display: flex
-    justify-content: space-around
-    border-bottom: solid 1px #f0f0f1
+    background-color: #15191D
+    .title
+      padding: 20px 0
+      font-size: 16px
+      color: white
+    .navigator
+      position: relative
+      padding: 12px 0
+      border-bottom: solid 1px #f0f0f1
+      font-size: 12px
+      .nav-list
+        display: flex
+        justify-content: space-around
+        li
+          width: 60px
+          color: #636873
+          &.active
+            color: white
+    .triangle-up
+      position: absolute
+      left: 50%
+      transform: translate(-50%, 0)
+      bottom: 0
+      width: 0
+      height: 0
+      border-left: 7px solid transparent
+      border-right: 7px solid transparent
+      border-bottom: 8px solid #E0E4E8
+      transition: all 0.3
+      &.left
+        left: 16.67%
+      &.right
+        left: 83.34%
   .content
     height: calc(100% - 85px)
     overflow: hidden
-  .active
-    color: orange
+  
 </style>
