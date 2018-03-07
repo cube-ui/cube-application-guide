@@ -1,7 +1,11 @@
 <template>
   <div class="match-list">
     <cube-scroll
-      :data="matchList" :options="options">
+      ref="scroll"
+      :data="matchList" 
+      :options="options"
+      @pulling-down="onPullingDown"
+      @pulling-up="onPullingUp">
       <ul>
         <li v-for="(item, index) in matchList" :key="index" class="match-item">
           <div class="left-team">
@@ -37,9 +41,42 @@ export default {
         pullDownRefresh: {
           threshold: 90,
           stop: 40,
-          txt: 'Refresh success'
+          txt: '刷新成功'
+        },
+        pullUpLoad: {
+          threshold: 100,
+          txt: {
+            more: '加载成功',
+            noMore: '没有更多的数据啦'
+          }
         }
       }
+    }
+  },
+  methods: {
+    onPullingDown () {
+      setTimeout(() => {
+        if (Math.random() > 0.5) {
+          for (let index = 5; index > 0; index--) {
+            let match = this.matchList[index]
+            this.matchList.unshift(match)
+          }
+        } else {
+          this.$refs.scroll.forceUpdate()
+        }
+      }, 1000)
+    },
+    onPullingUp () {
+      setTimeout(() => {
+        if (Math.random() > 0.5) {
+          for (let index = 5; index < 10; index++) {
+            let match = this.matchList[index]
+            this.matchList.push(match)
+          }
+        } else {
+          this.$refs.scroll.forceUpdate()
+        }
+      }, 1000)
     }
   }
 }
@@ -48,13 +85,15 @@ export default {
 <style lang="stylus">
 .match-list
   height: 618px
+  background-color: white
   .match-item
     border-bottom: 1px solid #f0f0f1
     padding: 10px 0
     display: flex
+    justify-content: space-around
     .left-team,.right-team
       text-align: center
-      flex: 1
+      width: 80px
       img
         display: inline-block
         width: 35px
@@ -63,18 +102,18 @@ export default {
       .name 
         font-size: 14px
     .center
-      flex-basis: 50%
       font-size: 12px
+      width: 80px
       .guest
         display: inline-block
-        background-color: green
+        background-color: #3D8F29
         color: white
         line-height: 16px
         padding: 3px 10px
         border-radius: 25px
         margin-bottom: 5px
       .end
-        background-color: red
+        background-color: #E86F5D
       .score
         font-size: 14px
         font-weight: 500
