@@ -18,15 +18,20 @@ import {
   ActionSheet,
   Scroll,
   Slide,
-  IndexList
+  IndexList,
+  createAPI
 } from 'cube-ui'
 import App from './App'
+import SubscribeDialog from './components/subscribe-dialog/subscribe-dialog'
+
+createAPI(Vue, SubscribeDialog, [], true)
 
 Vue.use(Button)
 Vue.use(Checkbox)
 Vue.use(CheckboxGroup)
 Vue.use(Loading)
 Vue.use(Tip)
+Vue.use(Popup)
 Vue.use(Toast)
 Vue.use(Picker)
 Vue.use(TimePicker)
