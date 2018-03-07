@@ -19,11 +19,10 @@
         :loop="false"
         :autoPlay="false"
         :threshold="0.1"
-        @change="slideChange"
-        >
+        @change="slideChange">
         <cube-slide-item v-for="(item, index) in tabList" :key="index">
           <div class="match-list-wrapper">
-            <match-list></match-list>
+            <match-list :type="index"></match-list>
           </div>
         </cube-slide-item>
         <div slot="dots"></div>
@@ -73,7 +72,6 @@ html, body, #app
     .navigator
       position: relative
       padding-bottom: 12px
-      border-bottom: solid 1px #f0f0f1
       font-size: 12px
       .nav-list
         display: flex
@@ -99,7 +97,9 @@ html, body, #app
       &.right
         left: 83.34%
   .content
-    height: calc(100% - 85px)
+    height: calc(100% - 80px)
     overflow: hidden
+    .match-list-wrapper
+      height: 100%
   
 </style>
