@@ -53,7 +53,13 @@ export default {
       }
     }
   },
+  created () {
+    this.subscribeDialog = this.$createSubscribeDialog()
+  },
   methods: {
+    subscribe () {
+      this.subscribeDialog.show()
+    },
     onPullingDown () {
       setTimeout(() => {
         if (Math.random() > 0.5) {
