@@ -14,7 +14,7 @@
           </div>
           <div class="center">
             <p v-if="item.live" class="guest" :class="{end : item.isEnd}">{{item.live}}</p>
-            <p v-if="item.order" class="order">{{item.order}}</p>
+            <p v-if="item.order" class="order" @click="subscribe">{{item.order}}</p>
             <p class="score" :class="{last: item.isEnd}">
               {{item.hostScore}} - {{item.guestScore}}
             </p>
@@ -45,7 +45,7 @@ export default {
         },
         pullDownRefresh: {
           threshold: 90,
-          stop: 40,
+          stop: 50,
           txt: '刷新成功'
         },
         pullUpLoad: {
@@ -56,6 +56,11 @@ export default {
           }
         }
       }
+    }
+  },
+  watch: {
+    type: function (newType) {
+      this.matchList = List[newType][this.status]
     }
   },
   created () {
@@ -97,7 +102,7 @@ export default {
 
 <style lang="stylus">
 .match-list
-  height: 618px
+  height: 100%
   background-color: #E2E5EA
   .match-inner
     background-color: #FFFFFF
@@ -111,7 +116,6 @@ export default {
         width: 80px
         img
           display: inline-block
-          width: 38px
           height: 38px
           margin-bottom: 7px
         .name 
@@ -157,4 +161,8 @@ export default {
           color: #878F98
         .time
           color: #92929A
+.before-trigger, .cube-pulldown-wrapper
+  color: #7D7D7D
+  font-size: 12px
+  line-height: 20px
 </style>

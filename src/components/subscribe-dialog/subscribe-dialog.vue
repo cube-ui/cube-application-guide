@@ -6,7 +6,7 @@
         <div class="title">开启推送通知</div>
         <img src="./subscribe.png">
         <p class="desc">第一时间获取最新鲜出炉的新闻攻略、赛事咨询、数据专题、精彩视频</p>
-        <cube-button class="button" @click="hide">现在开启</cube-button>
+        <cube-button class="button" @click="start">现在开启</cube-button>
       </div>
     </cube-popup>
   </div>
@@ -21,6 +21,14 @@ export default {
     },
     hide () {
       this.$refs.popup.hide()
+    },
+    start () {
+      this.$refs.popup.hide()
+      this.$createToast({
+        type: 'correct',
+        txt: '开启成功',
+        time: 1000
+      }).show()
     }
   }
 }

@@ -1,9 +1,9 @@
 <template>
   <div id="app">
     <div class="header">
-      <div class="title">
+      <div class="title" @click="showPicker">
         <span>全部赛事</span>
-        <i class="cubeic-select"  ref="select"></i>
+        <i class="cubeic-select" :class="{flip: toFlip}" ref="select"></i>
       </div>
       <div class="navigator">
         <ul class="nav-list">
@@ -43,10 +43,29 @@ export default {
     return {
       currentPage: 1,
       tabList: ['已结束', '直播中', '我的关注'],
+      toFlip: false,
+      pickerList: [
+        {text: 'NBA', value: 'NBA'},
+        {text: 'DOTA', value: 'dota'},
+        {text: 'SOCCER', value: 'soccer'}
+      ],
       type: 'soccer'
     }
   },
   mounted () {
+    this.picker = this.$createPicker({
+      title: '赛事',
+      data: [this.pickerList],
+      onSelect: () => {
+        this.toFlip = !this.toFlip
+      },
+      onCancel: () => {
+        this.toFlip = !this.toFlip
+      },
+      onValueChange: (selectedVal) => {
+        this.type = selectedVal[0]
+      }
+    })
   },
   methods: {
     switchTab (index) {
@@ -54,6 +73,10 @@ export default {
     },
     slideChange (index) {
       this.currentPage = index
+    },
+    showPicker () {
+      this.toFlip = !this.toFlip
+      this.picker.show()
     }
   },
   components: {
@@ -75,6 +98,10 @@ html, body, #app
       padding: 20px 0
       font-size: 16px
       color: white
+      display: inline-block
+      .flip
+        display: inline-block
+        transform: rotate(180deg)
     .navigator
       position: relative
       padding-bottom: 12px
