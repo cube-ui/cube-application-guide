@@ -1,7 +1,10 @@
 <template>
   <div id="app">
     <div class="header">
-      <div class="title">全部赛事</div>
+      <div class="title">
+        <span>全部赛事</span>
+        <i class="cubeic-select"  ref="select"></i>
+      </div>
       <div class="navigator">
         <ul class="nav-list">
           <li v-for="(item, index) in tabList" :key="index"
@@ -22,7 +25,7 @@
         @change="slideChange">
         <cube-slide-item v-for="(item, index) in tabList" :key="index">
           <div class="match-list-wrapper">
-            <match-list :type="index"></match-list>
+            <match-list :type="type" :status="index"></match-list>
           </div>
         </cube-slide-item>
         <div slot="dots"></div>
@@ -39,11 +42,11 @@ export default {
   data () {
     return {
       currentPage: 1,
-      tabList: ['已结束', '直播中', '我的关注']
+      tabList: ['已结束', '直播中', '我的关注'],
+      type: 'soccer'
     }
   },
-  components: {
-    MatchList
+  mounted () {
   },
   methods: {
     switchTab (index) {
@@ -52,6 +55,9 @@ export default {
     slideChange (index) {
       this.currentPage = index
     }
+  },
+  components: {
+    MatchList
   }
 }
 </script>
@@ -101,5 +107,5 @@ html, body, #app
     overflow: hidden
     .match-list-wrapper
       height: 100%
-  
+      background-color: #E2E5EA
 </style>
