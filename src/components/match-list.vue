@@ -15,10 +15,10 @@
           <div class="center">
             <p v-if="item.live" class="guest" :class="{end : item.isEnd}">{{item.live}}</p>
             <p v-if="item.order" class="order">{{item.order}}</p>
-            <p class="score">
+            <p class="score" :class="{last: item.isEnd}">
               {{item.hostScore}} - {{item.guestScore}}
             </p>
-            <p class="time">{{item.endTime}}</p>
+            <p v-if="!item.isEnd" class="time">{{item.endTime}}</p>
 
           </div>
           <div class="right-team">
@@ -135,6 +135,18 @@ export default {
           font-weight: 500
           margin-bottom: 7px
           position: relative
+          .order
+            display: inline-block
+            border-radius: 25px
+            border:1px #2F6220 solid
+            padding: 3px 20px
+            font-size: 100%
+            position: absolute
+            right: -100px
+            transform: translateY(-50%)
+        .last
+          font-size: 22px
+          margin-top: 5px
         .time
           color: #92929A
 </style>
