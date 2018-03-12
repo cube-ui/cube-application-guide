@@ -59,8 +59,8 @@ export default {
     }
   },
   watch: {
-    type: function (newType) {
-      this.matchList = List[newType][this.status]
+    type () {
+      this.matchList = List[this.type][this.status]
     }
   },
   created () {
@@ -72,7 +72,7 @@ export default {
     },
     onPullingDown () {
       setTimeout(() => {
-        if (Math.random() > 0.5) {
+        if (Math.random() > 0) {
           let match = []
           for (let index = 5; index > 0; index--) {
             match.push(this.matchList[index])
