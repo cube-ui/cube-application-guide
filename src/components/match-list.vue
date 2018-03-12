@@ -123,7 +123,8 @@ export default {
           margin-bottom: 7px
         .order
           display: inline-block
-          border:1px #2F6220 solid
+          border:1px #007100 solid
+          color: #49873D
           border-radius: 25px
           line-height: 16px
           padding: 3px 20px
@@ -147,6 +148,7 @@ export default {
         .last
           font-size: 22px
           margin-top: 5px
+          color: #878F98
         .time
           color: #92929A
 </style>
