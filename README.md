@@ -58,9 +58,9 @@ Y allowed in .vue files - render functions are required elsewhere
 # 是否建立端对端测试
 ? Setup e2e tests with Nightwatch? No
 ```
-你可以在[这里](https://github.com/cube-ui/cube-template/wiki) 对以上的问题有更深入的了解
+你可以在[这里](https://github.com/cube-ui/cube-template/wiki)对以上的问题有更深入的了解
 注意，cube-cli 脚手架默认帮我们在 main.js 中注册了很多 cub-ui 的组件，你可以将你不需要的删除。
-现在，我们就有了最基本的项目结构，可参考[stage-1](https://github.com/cube-ui/cube-application-guide/tree/stage-1)分支。
+现在，我们就有了最基本的项目结构，可参考 [stage-1] (https://github.com/cube-ui/cube-application-guide/tree/stage-1)分支。
 
 <img src="http://img.blog.csdn.net/20180313082311325?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvSG9uZXltYW8=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" width="30%"/>
 　　
@@ -74,7 +74,7 @@ $ npm run dev
 ```
 现在，根据功能我们将项目划分出赛事列表组件 MatchList ,以及弹窗组件 SubscribeDialog 。首先，我们在 App.vue 中写一下应用的基本结构。
 #### App.vue
-我们先构建一下顶部导航部分，此部分可参考[stage-2](https://github.com/cube-ui/cube-application-guide/tree/stage-2) 。
+我们先构建一下顶部导航部分，此部分可参考 [stage-2] (https://github.com/cube-ui/cube-application-guide/tree/stage-2) 。
 
 ```html
 <div id="app">
