@@ -1,14 +1,16 @@
+# cube-ui 快速上手教程
+
 cube-ui 是一个基于 [Vue.js](https://cn.vuejs.org/v2/guide/%20Vue.js) 实现的精致移动端组件库。
 它响应迅速、动画流畅，追求极致的交互体验。
 总体分为基础、弹层、滚动三大组件模块，可以说基本涵盖了我们移动端所有的组件需求。
 
 那么这里呢，我们想利用它来做一个浏览赛事的 APP ，大体可以分为顶部导航、比赛列表和弹窗三大部分。
-首先，用户要可以流畅的滚动列表来查看比赛，并且可以通过下拉列表来刷新赛事情况，以及通过上拉列表的方式来加载更多赛事；其次，用户可以左右滑动 Tab 页，或者点击顶部 Tab 来切换不同状态的比赛；接着，用户还可以对比赛的类型进行选择，你想看篮球、足球还是 Dota ?然后，用户可以对感兴趣的比赛进行订阅，我们利用弹窗来给用户反馈一些提示信息。先给你看一下，最终完成的效果是这样哒~ 。好了，现在就让我们从初始化项目开始吧……
+首先，用户要可以流畅的滚动列表来查看比赛，并且可以通过下拉列表来刷新赛事情况，以及通过上拉列表的方式来加载更多赛事；其次，用户可以左右滑动 Tab 页，或者点击顶部 Tab 来切换不同状态的比赛；接着，用户还可以对比赛的类型进行选择，你想看篮球、足球还是 Dota ？然后，用户可以对感兴趣的比赛进行订阅，我们利用弹窗来给用户反馈一些提示信息。先给你看一下，最终完成的效果是这样哒~ 。好了，现在就让我们从初始化项目开始吧……
 
 ![Example QR](./src/assets/p10.gif)
 
-#### 初始化项目
-cube-ui 为我们提供了脚手架，可以方便的迅速初始化一个 cube-ui 项目，里面有基本配置和基础代码。然后你就可以开始迅速的使用它了。
+## 初始化项目
+cube-ui 为我们提供了脚手架，可以方便的迅速初始化一个 cube-ui 项目，里面有基本配置和基础代码，然后你就可以开始的使用它了。
 ```shell
 # 在当前目录下初始化一个 cube-ui 项目
 $ vue init cube-ui/cube-template
@@ -16,7 +18,7 @@ $ vue init cube-ui/cube-template
 $ vue init cube-ui/template some-sub-application
 
 ```
-上面两种方法都可以。建议你已经创建了一个空文件夹，然后进入空文件夹后再使用第一种命令，或直接用第二种。
+上面两种方法都可以，建议你已经创建了一个空文件夹，然后进入空文件夹后再使用第一种命令，或直接用第二种。
 接着，你需要回答一些问题：
 
 ```shell
@@ -63,7 +65,7 @@ Y allowed in .vue files - render functions are required elsewhere
 现在，我们就有了最基本的项目结构，可参考 [stage-1](https://github.com/cube-ui/cube-application-guide/tree/stage-1) 分支。
 
 <img src="http://img.blog.csdn.net/20180313082311325?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvSG9uZXltYW8=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" width="30%"/>
-　　
+
 现在，你可以通过以下命令，来启动一下项目了。成功后，你会看到一个有 Vue 标志的页面。
 
 ```shell
@@ -72,8 +74,8 @@ $ npm install
 # 在本地的8080端口起一个有热刷新功能的服务
 $ npm run dev
 ```
-现在，根据功能我们将项目划分出赛事列表组件 MatchList ,以及弹窗组件 SubscribeDialog 。首先，我们在 App.vue 中写一下应用的基本结构。
-#### App.vue
+现在，根据功能我们将项目划分出赛事列表组件 MatchList ，以及弹窗组件 SubscribeDialog 。首先，我们在 App.vue 中写一下应用的基本结构。
+### App.vue
 我们先构建一下顶部导航部分，此部分可参考 [stage-2](https://github.com/cube-ui/cube-application-guide/tree/stage-2) 。
 
 ```html
@@ -123,7 +125,7 @@ $ npm run dev
 ```
 
 由于我们的列表内容比较复杂，又是一个组件，所以我们使用了自定义内容。Slide 组件为我们提供了默认插槽和 `cube-slide-item` 来自定义每个轮播页的结构，`cube-slide` 也为我们预留了很多的参数可供设置，比如这里，我们设置了它的初始索引值为1、不循环播放、不自动播放、切换页面的滑动阈值等，详细参考[官方文档](https://didi.github.io/cube-ui/#/zh-CN/docs/introduction)。现在，用户就可以很方便的通过左右滑动来切换 Tab 页了，你可以去 [stage-2](https://github.com/cube-ui/cube-application-guide/tree/stage-2) 查看这一步的效果，接下来，我们继续来实现列表部分。
-#### MatchList
+### MatchList
 此部分参考 [stage-3](https://github.com/cube-ui/cube-application-guide/tree/stage-3) 分支。
 我们先来实现一下比赛列表的静态样式。
 
@@ -153,7 +155,7 @@ $ npm run dev
 
 MatchList是我们模拟的列表数据，每个 `li` 都是一条赛事，整个 `ul` 是赛事列表。具体的数据渲染以及元素样式，就不一一解释啦，你可以去仓库代码里详细[查看](https://github.com/cube-ui/cube-application-guide/blob/stage-3/src/components/match-list.vue)。接下来，就要为我们的列表组件添加一些丰富的功能了。
 
-##### 滚动
+#### 滚动
 在比赛列表这个组件中，我们的主要功能就是滚动，所以我们可以使用 cube-ui 的 Scroll 组件来完成，从而为用户提供了更流畅的浏览体验。
 由上一步可以看到，我们的列表内容还是比较复杂的，所以可以采用默认插槽来自定义内容，也就是说，直接把我们上面的列表内容，包在 `<cube-scroll>` 标签里就行了。当然，如果你的数据十分简单，可以直接将数据传入 `<cube-scroll>` 的 `data`字段  。
 
@@ -184,7 +186,7 @@ options: {
 ```
 
 这里还需提醒大家注意一下，在使用 Scroll 组件的时候，为保证正常滚动，内容元素  `.cube-scroll-content`  在滚动方向上的长度必须大于容器元素  `.cube-scroll-wrapper` 。具体滚动原理请去往[官方文档](https://didi.github.io/cube-ui/#/zh-CN/docs/introduction)里查看。
-##### 下拉刷新
+#### 下拉刷新
 比赛的变化瞬息万变，用户就需要时不时的刷新列表来获取最新的数据。
 Scroll 组件默认无下拉刷新功能，我们需要通过配置项 `pullDownRefresh` 开启。
 
@@ -229,7 +231,7 @@ loadMatch (type) {
 
 这里需要注意的是，如果请求结果是没有新数据，则必须使用 `this.$refs.scroll.forceUpdate()`  结束此次下拉刷新。这样，Scroll 组件才会开始监听下一次下拉刷新操作。
 另外，如果你不喜欢内置的下拉刷新动画，还可以用作用域插槽做自定义动画。详情见[官方文档](https://didi.github.io/cube-ui/#/zh-CN/docs/introduction)。
-##### 上拉加载
+#### 上拉加载
 我们不可能一次放入所有的列表数据，用户可以通过上来加载来查看更多的比赛。
 与下拉刷新相同，Scroll 组件默认无上拉加载功能，可通过配置项  `pullUpLoad` 开启。
 
@@ -252,7 +254,7 @@ onPullingUp () {
   this.loadMatch('up')
 },
 loadMatch (type) {
-      setTimeout(() => {     //这里用setTimeout模拟数据请求,真实情况下你需要向接口请求数据
+      setTimeout(() => {     //这里用setTimeout模拟数据请求，真实情况下你需要向接口请求数据
         if (Math.random() > 0.5) {
           let match = []
           for (let index = 5; index > 0; index--) {
@@ -272,9 +274,9 @@ loadMatch (type) {
 ```
 
 与下拉刷新相同，请注意没有数据的情况，以及同样可以用作用域插槽做自定义动画，详情见[官方文档](https://didi.github.io/cube-ui/#/zh-CN/docs/introduction)。
-#### 订阅弹窗
+### 订阅弹窗
 我们需要在用户点击订阅后，为用户弹一个开启订阅的弹窗，因为弹窗样子比较花，哈哈，所以我们可以基于 cube-ui 的 Popup 封装一个，这也是 cube-ui 为我们提供的一个很好的功能。那这里，就不得不先说一下，cube-ui 的另一个是非重要的 API了。
-##### createAPI方法
+#### createAPI方法
 `createAPI` 的作用是把我们之前声明式的组件使用方式改变成 API 式的调用。我们知道 Vue 推荐的就是声明式的组件使用方式，比如在使用一个组件 xxx，我们简单在使用的地方声明它就好了。
 
 ```html
@@ -304,10 +306,10 @@ this.subscribeDialog = this.$createSubscribeDialog()
 
 当你想让这个弹窗显示，就执行 `.show()` 方法。当执行 .show 的时候，cube-ui 内部会把 SubscribeDialog 组件动态挂载到 body 下。
 
-你还可以为你的弹出层做 mask 之类更详细的配置,这一部分你可以参考项目中的 [stage-4](https://github.com/cube-ui/cube-application-guide/tree/stage-4) 分支。
+你还可以为你的弹出层做 mask 之类更详细的配置，这一部分你可以参考项目中的 [stage-4](https://github.com/cube-ui/cube-application-guide/tree/stage-4) 分支。
 cube-ui 的弹出层组件部分，还包含了 Picker、TimePicker、Dialog 等其他弹出层，详情见[官方文档](https://didi.github.io/cube-ui/#/zh-CN/docs/introduction)。
 
-#### 赛事选择
+### 赛事选择
 我们希望用户在点击顶部的全部赛事后，由屏幕下方上滑出一个弹窗，供用户选择比赛类型。像这样：
 <img src="http://img.blog.csdn.net/20180312203957620?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvSG9uZXltYW8=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" width="40%"/>
 
