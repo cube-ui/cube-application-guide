@@ -59,7 +59,7 @@ Y allowed in .vue files - render functions are required elsewhere
 ? Setup e2e tests with Nightwatch? No
 ```
 你可以在[这里](https://github.com/cube-ui/cube-template/wiki) 对以上的问题有更深入的了解
-注意，cube-cli脚手架默认帮我们在main.js中注册了很多cub-ui的组件，你可以将你不需要的删除。
+注意，cube-cli 脚手架默认帮我们在 main.js 中注册了很多 cub-ui 的组件，你可以将你不需要的删除。
 现在，我们就有了最基本的项目结构，可参考[stage-1](https://github.com/cube-ui/cube-application-guide/tree/stage-1)分支。
 
 <img src="http://img.blog.csdn.net/20180313082311325?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvSG9uZXltYW8=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" width="30%"/>
@@ -155,7 +155,7 @@ MatchList是我们模拟的列表数据，每个 `li` 都是一条赛事，整�
 
 ##### 滚动
 在比赛列表这个组件中，我们的主要功能就是滚动，所以我们可以使用 cube-ui 的 Scroll 组件来完成，从而为用户提供了更流畅的浏览体验，
-由上一步可以看到，我们的列表内容还是比较复杂的，所以可以采用默认插槽来自定义内容。也就是说，直接把我们上面的列表内容，包在 `<cube-scroll>` 标签里就行了。当然，如果你的数据十分简单，可以直接将数据传入 `<cube-scroll>` 的 `data字段` 。
+由上一步可以看到，我们的列表内容还是比较复杂的，所以可以采用默认插槽来自定义内容。也就是说，直接把我们上面的列表内容，包在 `<cube-scroll>` 标签里就行了。当然，如果你的数据十分简单，可以直接将数据传入 `<cube-scroll>` 的 `data`字段  。
 
 ```html
 <cube-scroll
@@ -172,7 +172,7 @@ MatchList是我们模拟的列表数据，每个 `li` 都是一条赛事，整�
 </cube-scroll>
 ```
 
-虽然我们是自定义内容，但同样建议为 Scroll 的 `data` 属性传入数据，这样 Scroll组件可以帮我们自动进行数据监听和重新渲染。
+虽然我们是自定义内容，但同样建议为 Scroll 的 `data` 属性传入数据，这样 Scroll 组件可以帮我们自动进行数据监听和重新渲染。
 `<cube-scroll>` 还为我们提供了很多的参数，你可以通过他们来设置滚动条、滚动方向、开启下拉刷新功能等。详细请参考[官方文档](https://didi.github.io/cube-ui/#/zh-CN/docs/introduction)。
 比如这里，我们通过 `options` 的 `scrollbar` 来对滚动条进行设置。你可以选择显示或不显示。这里，我们选择淡入淡出的滚动条。
 
@@ -183,7 +183,7 @@ options: {
 },
 ```
 
-这里还需提醒大家注意一下，在使用Scroll组件的时候，为保证正常滚动，内容元素  `.cube-scroll-content`  在滚动方向上的长度必须大于容器元素  `.cube-scroll-wrapper` 。具体滚动原理请去往[官方文档](https://didi.github.io/cube-ui/#/zh-CN/docs/introduction)里查看。
+这里还需提醒大家注意一下，在使用 Scroll 组件的时候，为保证正常滚动，内容元素  `.cube-scroll-content`  在滚动方向上的长度必须大于容器元素  `.cube-scroll-wrapper` 。具体滚动原理请去往[官方文档](https://didi.github.io/cube-ui/#/zh-CN/docs/introduction)里查看。
 ##### 下拉刷新
 比赛的变化瞬息万变。用户就需要时不时的刷新列表来获取最新的数据。
 Scroll 组件默认无下拉刷新功能，我们需要通过配置项 `pullDownRefresh` 开启。
@@ -231,7 +231,7 @@ loadMatch (type) {
 另外，如果你不喜欢内置的下拉刷新动画，还可以用作用域插槽做自定义动画。详情见[官方文档](https://didi.github.io/cube-ui/#/zh-CN/docs/introduction)。
 ##### 上拉加载
 我们不可能一次放入所有的列表数据，用户可以通过上来加载来查看更多的比赛。
-与下拉刷新相同，Scroll 组件默认无上拉加载功能，可通过配置项pullUpLoad开启。
+与下拉刷新相同，Scroll 组件默认无上拉加载功能，可通过配置项  `pullUpLoad` 开启。
 
 ```js
 pullUpLoad: {
@@ -289,7 +289,7 @@ loadMatch (type) {
 <img src="http://img.blog.csdn.net/20180313084959356?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvSG9uZXltYW8=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" width="40%"/>
 
 cube-ui 提供了所有弹窗类组件的基类组件 Popup，如果是新增一个弹窗类组件，推荐基于 Popup 做二次开发。我们这里就是基于 Proup 封装了名为 subscribe-dialog 的弹窗组件。
-首先我们在 main.js 中通过 createAPI 创建一个this.$createSubscribeDialog API，把 SubscribeDialog 变成一个 API 式调用的组件：
+首先我们在 main.js 中通过 createAPI 创建一个 `this.$createSubscribeDialog` API，把 SubscribeDialog 变成一个 API 式调用的组件：
 
 ```js
 import SubscribeDialog from './components/subscribe-dialog/subscribe-dialog'
@@ -304,13 +304,14 @@ this.subscribeDialog = this.$createSubscribeDialog()
 
 当你想让这个弹窗显示，就执行 `.show()` 方法。当执行 .show 的时候，cube-ui 内部会把 SubscribeDialog 组件动态挂载到 body 下。
 
-你还可以为你的弹出层做 mask 之类更详细的配置,这一部分你可以参考项目中的[stage-4](https://github.com/cube-ui/cube-application-guide/tree/stage-4)分支。
-cube-ui的弹出层组件部分，还包含了 Picker、TimePicker、Dialog 等其他弹出层，详情见[官方文档](https://didi.github.io/cube-ui/#/zh-CN/docs/introduction)。
+你还可以为你的弹出层做 mask 之类更详细的配置,这一部分你可以参考项目中的 [stage-4](https://github.com/cube-ui/cube-application-guide/tree/stage-4) 分支。
+cube-ui 的弹出层组件部分，还包含了 Picker、TimePicker、Dialog 等其他弹出层，详情见[官方文档](https://didi.github.io/cube-ui/#/zh-CN/docs/introduction)。
 
 #### 赛事选择
 我们希望用户在点击顶部的全部赛事后，由屏幕下方上滑出一个弹窗，供用户选择比赛类型。像这样：
 <img src="http://img.blog.csdn.net/20180312203957620?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvSG9uZXltYW8=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" width="40%"/>
-这时，就可以使用 cube-ui 的 Picker组件。用户可以通过屏幕下边上滑出的 Picker，来选择想看的比赛类型。点击确认后，如果确认值有变，则更新比赛列表。并且点击取消、确定以及 Picker 之外的地方时，都让 Picker 消失。同样，Picker 也是用 CreateAPI 创建的。此部分见[stage-5](https://github.com/cube-ui/cube-application-guide/blob/stage-5/src/App.vue) 分支。
+
+这时，就可以使用 cube-ui 的 Picker 组件。用户可以通过屏幕下边上滑出的 Picker，来选择想看的比赛类型。点击确认后，如果确认值有变，则更新比赛列表。并且点击取消、确定以及 Picker 之外的地方时，都让 Picker 消失。同样，Picker 也是用 CreateAPI 创建的。此部分见 [stage-5](https://github.com/cube-ui/cube-application-guide/blob/stage-5/src/App.vue) 分支。
 
 ```js
 mounted () {
@@ -333,4 +334,4 @@ mounted () {
 我们创建了 Picker，并为它的 `data` 字段传入表示比赛类型的数组。然后你可以在它的各种事件处理函数中做你想做的事情。还可以为这个 Picker 做一些其他更详细的配置，详情见[官方文档](https://didi.github.io/cube-ui/#/zh-CN/docs/introduction)
 
 ### 总结
-到这里，我们的应用可以说是基本完成了。但其实，也还只是用了 cube-ui 几个比较主要的组件。cube-ui 还有很多很棒的组件，如表单、开关、loading等，如果你有兴趣的话，也可以继续丰富我们这个赛事应用。当然，你也已经完全可以借助 cube-ui ，开始一个自己的项目啦~
+到这里，我们的应用可以说是基本完成了。但其实，也还只是用了 cube-ui 几个比较主要的组件。cube-ui 还有很多很棒的组件，如表单、开关、loading 等，如果你有兴趣的话，也可以继续丰富我们这个赛事应用。当然，你也已经完全可以借助 cube-ui ，开始一个自己的项目啦~
