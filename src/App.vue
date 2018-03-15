@@ -1,10 +1,10 @@
 <template>
   <div id="app">
     <div class="header">
-      <div class="title" @click="showPicker">
+      <h1 class="title" @click="showPicker">
         <span>全部赛事</span>
-        <i class="cubeic-select" :class="{flip: toFlip}" ref="select"></i>
-      </div>
+        <i class="cubeic-select" :class="{down: toDown}"></i>
+      </h1>
       <div class="navigator">
         <ul class="nav-list">
           <li v-for="(item, index) in tabList" :key="index"
@@ -43,7 +43,7 @@ export default {
     return {
       currentPage: 1,
       tabList: ['已结束', '直播中', '我的关注'],
-      toFlip: false,
+      toDown: false,
       pickerList: [
         {text: 'NBA', value: 'NBA'},
         {text: 'DOTA', value: 'dota'},
@@ -57,10 +57,10 @@ export default {
       title: '赛事',
       data: [this.pickerList],
       onSelect: () => {
-        this.toFlip = !this.toFlip
+        this.toDown = false
       },
       onCancel: () => {
-        this.toFlip = !this.toFlip
+        this.toDown = false
       },
       onValueChange: (selectedVal) => {
         this.type = selectedVal[0]
@@ -75,7 +75,7 @@ export default {
       this.currentPage = index
     },
     showPicker () {
-      this.toFlip = !this.toFlip
+      this.toDown = true
       this.picker.show()
     }
   },
@@ -86,11 +86,12 @@ export default {
 </script>
 
 <style lang="stylus">
+@import './common/stylus/mixin.styl'
 html, body, #app
   height: 100%
   text-align: center
 #app
-  background-color: #E0E4E8
+  background-color: color_grey
   .header
     color: white
     background-color: #15191D
@@ -99,7 +100,7 @@ html, body, #app
       font-size: 16px
       color: white
       display: inline-block
-      .flip
+      .down
         display: inline-block
         transform: rotate(180deg)
     .navigator
@@ -111,7 +112,7 @@ html, body, #app
         justify-content: space-around
         li
           width: 60px
-          color: #636873
+          color: #E0E4E8
           &.active
             color: white
     .triangle-up
@@ -123,7 +124,7 @@ html, body, #app
       height: 0
       border-left: 7px solid transparent
       border-right: 7px solid transparent
-      border-bottom: 8px solid #E0E4E8
+      border-bottom: 8px solid color_grey
       transition: all 0.4s
       &.left
         left: 16.67%

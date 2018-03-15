@@ -32,13 +32,25 @@
 </template>
 
 <script>
-import List from '../common/data/match-list'
+import list from '../common/data/match-list'
+const UP = 'up'
+const DOWN = 'down'
+
 export default {
   name: 'match-list',
-  props: ['type', 'status'],
+  props: {
+    type: {
+      type: String,
+      default: 'soccer'
+    },
+    status: {
+      type: Number,
+      default: 1
+    }
+  },
   data () {
     return {
-      matchList: List[this.type][this.status],
+      matchList: list[this.type][this.status],
       options: {
         scrollbar: {
           fade: true
@@ -49,9 +61,9 @@ export default {
           txt: '刷新成功'
         },
         pullUpLoad: {
-          threshold: 100,
+          threshold: 0,
           txt: {
-            more: '加载成功',
+            more: '加载更多',
             noMore: '没有更多的比赛啦'
           }
         }
@@ -60,7 +72,7 @@ export default {
   },
   watch: {
     type () {
-      this.matchList = List[this.type][this.status]
+      this.matchList = list[this.type][this.status]
     }
   },
   created () {
@@ -71,26 +83,23 @@ export default {
       this.subscribeDialog.show()
     },
     onPullingDown () {
+      this.loadMatch('down')
+    },
+    onPullingUp () {
+      this.loadMatch('up')
+    },
+    loadMatch (type) {
       setTimeout(() => {
-        if (Math.random() > 0) {
+        if (Math.random() > 0.5) {
           let match = []
           for (let index = 5; index > 0; index--) {
             match.push(this.matchList[index])
           }
-          this.matchList.unshift(...match)
-        } else {
-          this.$refs.scroll.forceUpdate()
-        }
-      }, 1000)
-    },
-    onPullingUp () {
-      setTimeout(() => {
-        if (Math.random() > 0.5) {
-          let match = []
-          for (let index = 5; index < 10; index++) {
-            match.push(this.matchList[index])
+          if (type === DOWN) {
+            this.matchList.unshift(...match)
+          } else if (type === UP) {
+            this.matchList = this.matchList.concat(match)
           }
-          this.matchList = this.matchList.concat(match)
         } else {
           this.$refs.scroll.forceUpdate()
         }

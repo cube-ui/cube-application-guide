@@ -18,9 +18,11 @@ export default {
   methods: {
     show () {
       this.$refs.popup.show()
+      this.$emit('show')
     },
     hide () {
       this.$refs.popup.hide()
+      this.$emit('hide')
     },
     start () {
       this.$refs.popup.hide()
