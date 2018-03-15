@@ -5,7 +5,7 @@ cube-ui 是一个基于 [Vue.js](https://cn.vuejs.org/v2/guide/%20Vue.js) 实现
 那么这里呢，我们想利用它来做一个浏览赛事的 APP 。大体可以分为顶部导航、比赛列表和弹窗三大部分。
 首先，用户要可以流畅的滚动列表来查看比赛，并且可以通过下拉列表来刷新赛事情况，以及通过上拉列表的方式来加载更多赛事。其次，用户可以左右滑动 Tab 页，或者点击顶部 Tab 来切换不同状态的比赛。接着，用户还可以对比赛的类型进行选择，你想看篮球、足球还是 Dota ?然后，用户可以对感兴趣的比赛进行订阅，我们利用弹窗来给用户反馈一些提示信息。先给你看一下，最终完成的效果是这样哒~ 。好了，现在就让我们从初始化项目开始吧……
 
-<img src="http://img-blog.csdn.net/20180313230055659?watermark/2/text/Ly9ibG9nLmNzZG4ubmV0L0hvbmV5bWFv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" width="40%"/>
+![Example QR](./src/assets/p10.gif)
 
 #### 初始化项目
 cube-ui 为我们提供了脚手架，可以方便的迅速初始化一个 cube-ui 项目，里面有基本配置和基础代码。然后你就可以开始迅速的使用它了。
