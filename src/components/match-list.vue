@@ -102,6 +102,11 @@ export default {
           }
         } else {
           this.$refs.scroll.forceUpdate()
+          if (type === UP) {
+            setTimeout(() => {
+              this.$refs.scroll.scroll.scrollBy(0, 64, 800)
+            }, 1000)
+          }
         }
       }, 1000)
     }
