@@ -182,6 +182,7 @@ MatchList是我们模拟的列表数据，每个 `li` 都是一条赛事，整�
 options: {
   scrollbar: {
      fade: true
+  }
 },
 ```
 
@@ -210,27 +211,27 @@ onPullingDown () {
   this.loadMatch('down')
 },
 loadMatch (type) {
-      setTimeout(() => {     //这里用setTimeout模拟数据请求,真实情况下你需要向接口请求数据
-        if (Math.random() > 0.5) {
-          let match = []
-          for (let index = 5; index > 0; index--) {
-            match.push(this.matchList[index])
-          }
-          if (type === DOWN) {
-            this.matchList.unshift(...match)
-          } else if (type === UP) {
-            this.matchList = this.matchList.concat(match)
-          }
-        } else {
-          this.$refs.scroll.forceUpdate()
-          if (type === UP) {   //上拉加载时，无更多数据的提示文案显示之后，让列表回到原位
-            setTimeout(() => {
-              this.$refs.scroll.scroll.scrollBy(0, 64, 800)
-            }, 1000)
-          }
-        }
-      }, 1000)
+  setTimeout(() => {     //这里用setTimeout模拟数据请求,真实情况下你需要向接口请求数据
+    if (Math.random() > 0.5) {
+      let match = []
+      for (let index = 5; index > 0; index--) {
+        match.push(this.matchList[index])
+      }
+      if (type === DOWN) {
+        this.matchList.unshift(...match)
+      } else if (type === UP) {
+        this.matchList = this.matchList.concat(match)
+      }
+    } else {
+      this.$refs.scroll.forceUpdate()
+      if (type === UP) {   //上拉加载时，无更多数据的提示文案显示之后，让列表回到原位
+        setTimeout(() => {
+          this.$refs.scroll.scroll.scrollBy(0, 64, 800)
+        }, 1000)
+      }
     }
+  }, 1000)
+}
 }
 ```
 
@@ -259,34 +260,34 @@ onPullingUp () {
   this.loadMatch('up')
 },
 loadMatch (type) {
-      setTimeout(() => {     //这里用setTimeout模拟数据请求，真实情况下你需要向接口请求数据
-        if (Math.random() > 0.5) {
-          let match = []
-          for (let index = 5; index > 0; index--) {
-            match.push(this.matchList[index])
-          }
-          if (type === DOWN) {
-            this.matchList.unshift(...match)
-          } else if (type === UP) {
-            this.matchList = this.matchList.concat(match)
-          }
-        } else {
-          this.$refs.scroll.forceUpdate()
-          if (type === UP) {   //上拉加载时，无更多数据的提示文案显示之后，让列表回到原位
-            setTimeout(() => {
-              this.$refs.scroll.scroll.scrollBy(0, 64, 800)
-            }, 1000)
-          }
-        }
-      }, 1000)
+  setTimeout(() => {     //这里用setTimeout模拟数据请求，真实情况下你需要向接口请求数据
+    if (Math.random() > 0.5) {
+      let match = []
+      for (let index = 5; index > 0; index--) {
+        match.push(this.matchList[index])
+      }
+      if (type === DOWN) {
+        this.matchList.unshift(...match)
+      } else if (type === UP) {
+        this.matchList = this.matchList.concat(match)
+      }
+    } else {
+      this.$refs.scroll.forceUpdate()
+      if (type === UP) {   //上拉加载时，无更多数据的提示文案显示之后，让列表回到原位
+        setTimeout(() => {
+          this.$refs.scroll.scroll.scrollBy(0, 64, 800)
+        }, 1000)
+      }
     }
+  }, 1000)
+}
 }
 ```
 
 与下拉刷新相同，请注意没有数据的情况，以及同样可以用作用域插槽做自定义动画，详情见[官方文档](https://didi.github.io/cube-ui/#/zh-CN/docs/introduction)。
 ### 订阅弹窗
-我们需要在用户点击订阅后，为用户弹一个开启订阅的弹窗，因为弹窗样子比较花，哈哈，所以我们可以基于 cube-ui 的 Popup 封装一个，这也是 cube-ui 为我们提供的一个很好的功能。那这里，就不得不先说一下，cube-ui 的另一个是非重要的 API了。
-#### createAPI方法
+我们需要在用户点击订阅后，为用户弹一个开启订阅的弹窗，因为弹窗样子比较花，哈哈，所以我们可以基于 cube-ui 的 Popup 封装一个，这也是 cube-ui 为我们提供的一个很好的功能。那这里，就不得不先说一下，cube-ui 的另一个是非重要的 API 了。
+#### createAPI 方法
 `createAPI` 的作用是把我们之前声明式的组件使用方式改变成 API 式的调用。我们知道 Vue 推荐的就是声明式的组件使用方式，比如在使用一个组件 xxx，我们简单在使用的地方声明它就好了。
 
 ```html
@@ -329,18 +330,18 @@ cube-ui 的弹出层组件部分，还包含了 Picker、TimePicker、Dialog 等
 ```js
 mounted () {
   this.picker = this.$createPicker({
-     title: '赛事',
-     data: [this.pickerList],
-     onSelect: () => {   //点击确定时
-       this.toFlip = !this.toFlip
-     },
-     onCancel: () => {  //点击取消时
-       this.toFlip = !this.toFlip
-     },
-     onValueChange: (selectedVal) => {   //确认的值有改变时
-       this.type = selectedVal[0]
-     }
-   })
+    title: '赛事',
+    data: [this.pickerList],
+    onSelect: () => {   //点击确定时
+      this.toFlip = !this.toFlip
+    },
+    onCancel: () => {  //点击取消时
+      this.toFlip = !this.toFlip
+    },
+    onValueChange: (selectedVal) => {   //确认的值有改变时
+      this.type = selectedVal[0]
+    }
+  })
 }
 ```
 
