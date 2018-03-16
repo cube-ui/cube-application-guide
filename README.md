@@ -153,7 +153,7 @@ $ npm run dev
 </ul>
 ```
 
-MatchList是我们模拟的列表数据，每个 `li` 都是一条赛事，整个 `ul` 是赛事列表。具体的数据渲染以及元素样式，就不一一解释啦，你可以去仓库代码里详细[查看](https://github.com/cube-ui/cube-application-guide/blob/stage-3/src/components/match-list.vue)。接下来，就要为我们的列表组件添加一些丰富的功能了。
+MatchList 是我们模拟的列表数据，每个 `li` 都是一条赛事，整个 `ul` 是赛事列表。具体的数据渲染以及元素样式，就不一一解释啦，你可以去仓库代码里详细[查看](https://github.com/cube-ui/cube-application-guide/blob/stage-3/src/components/match-list.vue)。接下来，就要为我们的列表组件添加一些丰富的功能了。
 
 #### 滚动
 在比赛列表这个组件中，我们的主要功能就是滚动，所以我们可以使用 cube-ui 的 Scroll 组件来完成，从而为用户提供了更流畅的浏览体验。
@@ -182,10 +182,11 @@ MatchList是我们模拟的列表数据，每个 `li` 都是一条赛事，整�
 options: {
   scrollbar: {
      fade: true
+  }
 },
 ```
 
-这里还需提醒大家注意一下，在使用 Scroll 组件的时候，为保证正常滚动，内容元素  `.cube-scroll-content`  在滚动方向上的长度必须大于容器元素  `.cube-scroll-wrapper` 。具体滚动原理请去往[官方文档](https://didi.github.io/cube-ui/#/zh-CN/docs/introduction)里查看。
+这里还需提醒大家注意一下，在使用 Scroll 组件的时候，为保证正常滚动，内容元素  `.cube-scroll-content`  在滚动方向上的长度必须大于容器元素  `.cube-scroll-wrapper` ，具体滚动原理请去往[官方文档](https://didi.github.io/cube-ui/#/zh-CN/docs/introduction)里查看。
 #### 下拉刷新
 比赛的变化瞬息万变，用户就需要时不时的刷新列表来获取最新的数据。
 Scroll 组件默认无下拉刷新功能，我们需要通过配置项 `pullDownRefresh` 开启。
@@ -210,32 +211,32 @@ onPullingDown () {
   this.loadMatch('down')
 },
 loadMatch (type) {
-      setTimeout(() => {     //这里用setTimeout模拟数据请求,真实情况下你需要向接口请求数据
-        if (Math.random() > 0.5) {
-          let match = []
-          for (let index = 5; index > 0; index--) {
-            match.push(this.matchList[index])
-          }
-          if (type === DOWN) {
-            this.matchList.unshift(...match)
-          } else if (type === UP) {
-            this.matchList = this.matchList.concat(match)
-          }
-        } else {
-          this.$refs.scroll.forceUpdate()
-          if (type === UP) {   //上拉加载时，无更多数据的提示文案显示之后，让列表回到原位
-            setTimeout(() => {
-              this.$refs.scroll.scroll.scrollBy(0, 64, 800)
-            }, 1000)
-          }
-        }
-      }, 1000)
+  setTimeout(() => {     //这里用setTimeout模拟数据请求,真实情况下你需要向接口请求数据
+    if (Math.random() > 0.5) {
+      let match = []
+      for (let index = 5; index > 0; index--) {
+        match.push(this.matchList[index])
+      }
+      if (type === DOWN) {
+        this.matchList.unshift(...match)
+      } else if (type === UP) {
+        this.matchList = this.matchList.concat(match)
+      }
+    } else {
+      this.$refs.scroll.forceUpdate()
+      if (type === UP) {   //上拉加载时，无更多数据的提示文案显示之后，让列表回到原位
+        setTimeout(() => {
+          this.$refs.scroll.scroll.scrollBy(0, 64, 800)
+        }, 1000)
+      }
     }
+  }, 1000)
+}
 }
 ```
 
 这里需要注意的是，如果请求结果是没有新数据，则必须使用 `this.$refs.scroll.forceUpdate()`  结束此次下拉刷新。这样，Scroll 组件才会开始监听下一次下拉刷新操作。
-另外，如果你不喜欢内置的下拉刷新动画，还可以用作用域插槽做自定义动画。详情见[官方文档](https://didi.github.io/cube-ui/#/zh-CN/docs/introduction)。
+另外，如果你不喜欢内置的下拉刷新动画，还可以用作用域插槽做自定义动画，详情见[官方文档](https://didi.github.io/cube-ui/#/zh-CN/docs/introduction)。
 #### 上拉加载
 我们不可能一次放入所有的列表数据，用户可以通过上来加载来查看更多的比赛。
 与下拉刷新相同，Scroll 组件默认无上拉加载功能，可通过配置项  `pullUpLoad` 开启。
@@ -259,34 +260,34 @@ onPullingUp () {
   this.loadMatch('up')
 },
 loadMatch (type) {
-      setTimeout(() => {     //这里用setTimeout模拟数据请求，真实情况下你需要向接口请求数据
-        if (Math.random() > 0.5) {
-          let match = []
-          for (let index = 5; index > 0; index--) {
-            match.push(this.matchList[index])
-          }
-          if (type === DOWN) {
-            this.matchList.unshift(...match)
-          } else if (type === UP) {
-            this.matchList = this.matchList.concat(match)
-          }
-        } else {
-          this.$refs.scroll.forceUpdate()
-          if (type === UP) {   //上拉加载时，无更多数据的提示文案显示之后，让列表回到原位
-            setTimeout(() => {
-              this.$refs.scroll.scroll.scrollBy(0, 64, 800)
-            }, 1000)
-          }
-        }
-      }, 1000)
+  setTimeout(() => {     //这里用setTimeout模拟数据请求，真实情况下你需要向接口请求数据
+    if (Math.random() > 0.5) {
+      let match = []
+      for (let index = 5; index > 0; index--) {
+        match.push(this.matchList[index])
+      }
+      if (type === DOWN) {
+        this.matchList.unshift(...match)
+      } else if (type === UP) {
+        this.matchList = this.matchList.concat(match)
+      }
+    } else {
+      this.$refs.scroll.forceUpdate()
+      if (type === UP) {   //上拉加载时，无更多数据的提示文案显示之后，让列表回到原位
+        setTimeout(() => {
+          this.$refs.scroll.scroll.scrollBy(0, 64, 800)
+        }, 1000)
+      }
     }
+  }, 1000)
+}
 }
 ```
 
 与下拉刷新相同，请注意没有数据的情况，以及同样可以用作用域插槽做自定义动画，详情见[官方文档](https://didi.github.io/cube-ui/#/zh-CN/docs/introduction)。
 ### 订阅弹窗
-我们需要在用户点击订阅后，为用户弹一个开启订阅的弹窗，因为弹窗样子比较花，哈哈，所以我们可以基于 cube-ui 的 Popup 封装一个，这也是 cube-ui 为我们提供的一个很好的功能。那这里，就不得不先说一下，cube-ui 的另一个是非重要的 API了。
-#### createAPI方法
+我们需要在用户点击订阅后，为用户弹一个开启订阅的弹窗，因为弹窗样子比较花，哈哈，所以我们可以基于 cube-ui 的 Popup 封装一个，这也是 cube-ui 为我们提供的一个很好的功能。那这里，就不得不先说一下，cube-ui 的另一个是非重要的 API 了。
+#### createAPI 方法
 `createAPI` 的作用是把我们之前声明式的组件使用方式改变成 API 式的调用。我们知道 Vue 推荐的就是声明式的组件使用方式，比如在使用一个组件 xxx，我们简单在使用的地方声明它就好了。
 
 ```html
@@ -295,24 +296,24 @@ loadMatch (type) {
 </tempalte>
 ```
 
-对于一般组件，这样使用并没有问题，但对于全屏类的弹窗组件，如果在一个层级嵌套很深的子组件中使用，仍然通过声明式的方式，很可能它的样式会受到父元素某些 CSS 的影响导致渲染不符合预期。这类组件最好的使用方式就是挂载到 body 下，但是我们如果是声明式地把这些组件挂载到最外层，对它们的控制也非常不灵活。其实最理想的方式是动态把这类组件挂载到 body 下，createAPI 就是干这个事情的。
+对于一般组件，这样使用并没有问题，但对于全屏类的弹窗组件，如果在一个层级嵌套很深的子组件中使用，仍然通过声明式的方式，很可能它的样式会受到父元素某些 CSS 的影响导致渲染不符合预期。这类组件最好的使用方式就是挂载到 body 下，但是我们如果是声明式地把这些组件挂载到最外层，对它们的控制也非常不灵活。其实最理想的方式是动态把这类组件挂载到 body 下，`createAPI` 就是干这个事情的。
 我们现在就用它来做我们的订阅弹窗。
 
-cube-ui 提供了所有弹窗类组件的基类组件 Popup，如果是新增一个弹窗类组件，推荐基于 Popup 做二次开发。我们这里就是基于 Proup 封装了名为 subscribe-dialog 的弹窗组件。
-首先我们在 main.js 中通过 createAPI 创建一个 `this.$createSubscribeDialog` API，把 SubscribeDialog 变成一个 API 式调用的组件：
+cube-ui 提供了所有弹窗类组件的基类组件 Popup，如果是新增一个弹窗类组件，推荐基于 Popup 做二次开发。我们这里就是基于 Proup 封装了名为 `subscribe-dialog` 的弹窗组件。
+首先我们在 main.js 中通过 `createAPI` 创建一个 `this.$createSubscribeDialog` API，把 `SubscribeDialog` 变成一个 API 式调用的组件：
 
 ```js
 import SubscribeDialog from './components/subscribe-dialog/subscribe-dialog'
 createAPI(Vue, SubscribeDialog, [], true)
 ```
 
-接着我们就可以在 MatchList 组件内部通过 this.$createSubscribeDialog() 的方式调用它
+接着我们就可以在 MatchList 组件内部通过 `this.$createSubscribeDialog()` 的方式调用它
 
 ```js
 this.subscribeDialog = this.$createSubscribeDialog()
 ```
 
-当你想让这个弹窗显示，就执行 `.show()` 方法。当执行 .show 的时候，cube-ui 内部会把 SubscribeDialog 组件动态挂载到 body 下。
+当你想让这个弹窗显示，就执行 `.show()` 方法。当执行 `.show()` 的时候，cube-ui 内部会把 `SubscribeDialog` 组件动态挂载到 body 下。
 
 ![Example QR](./src/assets/p9.jpeg)
 
@@ -321,26 +322,26 @@ this.subscribeDialog = this.$createSubscribeDialog()
 cube-ui 的弹出层组件部分，还包含了 Picker、TimePicker、Dialog 等其他弹出层，详情见[官方文档](https://didi.github.io/cube-ui/#/zh-CN/docs/introduction)。
 
 ### 赛事选择
-我们希望用户在点击顶部的全部赛事后，由屏幕下方上滑出一个弹窗，供用户选择比赛类型。像这样：
+我们希望用户在点击顶部的全部赛事后，由屏幕下方上滑出一个弹窗，供用户选择比赛类型，像这样：
 <img src="http://img.blog.csdn.net/20180312203957620?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvSG9uZXltYW8=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" width="40%"/>
 
-这时，就可以使用 cube-ui 的 Picker 组件。用户可以通过屏幕下边上滑出的 Picker，来选择想看的比赛类型，点击确认后，如果确认值有变，则更新比赛列表。并且点击取消、确定以及 Picker 之外的地方时，都让 Picker 消失。同样，Picker 也是用 CreateAPI 创建的。此部分见 [stage-5](https://github.com/cube-ui/cube-application-guide/blob/stage-5/src/App.vue) 分支。
+这时，就可以使用 cube-ui 的 Picker 组件。用户可以通过屏幕下边上滑出的 Picker，来选择想看的比赛类型，点击确认后，如果确认值有变，则更新比赛列表。并且点击取消、确定以及 Picker 之外的地方时，都让 Picker 消失。同样，Picker 也是用 `createAPI` 创建的，此部分见 [stage-5](https://github.com/cube-ui/cube-application-guide/blob/stage-5/src/App.vue) 分支。
 
 ```js
 mounted () {
   this.picker = this.$createPicker({
-     title: '赛事',
-     data: [this.pickerList],
-     onSelect: () => {   //点击确定时
-       this.toFlip = !this.toFlip
-     },
-     onCancel: () => {  //点击取消时
-       this.toFlip = !this.toFlip
-     },
-     onValueChange: (selectedVal) => {   //确认的值有改变时
-       this.type = selectedVal[0]
-     }
-   })
+    title: '赛事',
+    data: [this.pickerList],
+    onSelect: () => {   //点击确定时
+      this.toFlip = !this.toFlip
+    },
+    onCancel: () => {  //点击取消时
+      this.toFlip = !this.toFlip
+    },
+    onValueChange: (selectedVal) => {   //确认的值有改变时
+      this.type = selectedVal[0]
+    }
+  })
 }
 ```
 
