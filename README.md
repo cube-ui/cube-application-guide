@@ -1,6 +1,6 @@
 # cube-ui 快速上手教程
 
-cube-ui 是一个基于 [Vue.js](https://cn.vuejs.org/v2/guide/%20Vue.js) 实现的精致移动端组件库。
+[cube-ui](https://didi.github.io/cube-ui/#/zh-CN/) 是一个基于 [Vue.js](https://cn.vuejs.org/v2/guide/%20Vue.js) 实现的精致移动端组件库。
 它响应迅速、动画流畅，追求极致的交互体验。
 总体分为基础、弹层、滚动三大组件模块，可以说基本涵盖了我们移动端所有的组件需求。
 
@@ -223,6 +223,11 @@ loadMatch (type) {
           }
         } else {
           this.$refs.scroll.forceUpdate()
+          if (type === UP) {   //上拉加载时，无更多数据的提示文案显示之后，让列表回到原位
+            setTimeout(() => {
+              this.$refs.scroll.scroll.scrollBy(0, 64, 800)
+            }, 1000)
+          }
         }
       }, 1000)
     }
@@ -267,6 +272,11 @@ loadMatch (type) {
           }
         } else {
           this.$refs.scroll.forceUpdate()
+          if (type === UP) {   //上拉加载时，无更多数据的提示文案显示之后，让列表回到原位
+            setTimeout(() => {
+              this.$refs.scroll.scroll.scrollBy(0, 64, 800)
+            }, 1000)
+          }
         }
       }, 1000)
     }
@@ -288,8 +298,6 @@ loadMatch (type) {
 对于一般组件，这样使用并没有问题，但对于全屏类的弹窗组件，如果在一个层级嵌套很深的子组件中使用，仍然通过声明式的方式，很可能它的样式会受到父元素某些 CSS 的影响导致渲染不符合预期。这类组件最好的使用方式就是挂载到 body 下，但是我们如果是声明式地把这些组件挂载到最外层，对它们的控制也非常不灵活。其实最理想的方式是动态把这类组件挂载到 body 下，createAPI 就是干这个事情的。
 我们现在就用它来做我们的订阅弹窗。
 
-<img src="http://img.blog.csdn.net/20180313084959356?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvSG9uZXltYW8=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" width="40%"/>
-
 cube-ui 提供了所有弹窗类组件的基类组件 Popup，如果是新增一个弹窗类组件，推荐基于 Popup 做二次开发。我们这里就是基于 Proup 封装了名为 subscribe-dialog 的弹窗组件。
 首先我们在 main.js 中通过 createAPI 创建一个 `this.$createSubscribeDialog` API，把 SubscribeDialog 变成一个 API 式调用的组件：
 
@@ -306,6 +314,9 @@ this.subscribeDialog = this.$createSubscribeDialog()
 
 当你想让这个弹窗显示，就执行 `.show()` 方法。当执行 .show 的时候，cube-ui 内部会把 SubscribeDialog 组件动态挂载到 body 下。
 
+![Example QR](./src/assets/p9.jpeg)
+
+上图就是我们完成好的弹窗，在右边的审查元素中，我用两个小红点标出了 `App.vue` 挂载的元素和我们的弹窗组件，你可以看到他们是并列的关系，弹窗组件确实是直接被挂载到了 body 下。
 你还可以为你的弹出层做 mask 之类更详细的配置，这一部分你可以参考项目中的 [stage-4](https://github.com/cube-ui/cube-application-guide/tree/stage-4) 分支。
 cube-ui 的弹出层组件部分，还包含了 Picker、TimePicker、Dialog 等其他弹出层，详情见[官方文档](https://didi.github.io/cube-ui/#/zh-CN/docs/introduction)。
 
