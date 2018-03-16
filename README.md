@@ -300,7 +300,7 @@ loadMatch (type) {
 我们现在就用它来做我们的订阅弹窗。
 
 cube-ui 提供了所有弹窗类组件的基类组件 Popup，如果是新增一个弹窗类组件，推荐基于 Popup 做二次开发。我们这里就是基于 Proup 封装了名为 `subscribe-dialog` 的弹窗组件。
-首先我们在 main.js 中通过 createAPI 创建一个 `this.$createSubscribeDialog` API，把 `SubscribeDialog` 变成一个 API 式调用的组件：
+首先我们在 main.js 中通过 `createAPI` 创建一个 `this.$createSubscribeDialog` API，把 `SubscribeDialog` 变成一个 API 式调用的组件：
 
 ```js
 import SubscribeDialog from './components/subscribe-dialog/subscribe-dialog'
@@ -325,7 +325,7 @@ cube-ui 的弹出层组件部分，还包含了 Picker、TimePicker、Dialog 等
 我们希望用户在点击顶部的全部赛事后，由屏幕下方上滑出一个弹窗，供用户选择比赛类型。像这样：
 <img src="http://img.blog.csdn.net/20180312203957620?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvSG9uZXltYW8=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" width="40%"/>
 
-这时，就可以使用 cube-ui 的 Picker 组件。用户可以通过屏幕下边上滑出的 Picker，来选择想看的比赛类型，点击确认后，如果确认值有变，则更新比赛列表。并且点击取消、确定以及 Picker 之外的地方时，都让 Picker 消失。同样，Picker 也是用 createAPI 创建的。此部分见 [stage-5](https://github.com/cube-ui/cube-application-guide/blob/stage-5/src/App.vue) 分支。
+这时，就可以使用 cube-ui 的 Picker 组件。用户可以通过屏幕下边上滑出的 Picker，来选择想看的比赛类型，点击确认后，如果确认值有变，则更新比赛列表。并且点击取消、确定以及 Picker 之外的地方时，都让 Picker 消失。同样，Picker 也是用 `createAPI` 创建的。此部分见 [stage-5](https://github.com/cube-ui/cube-application-guide/blob/stage-5/src/App.vue) 分支。
 
 ```js
 mounted () {
