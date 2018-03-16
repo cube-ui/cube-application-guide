@@ -296,24 +296,24 @@ loadMatch (type) {
 </tempalte>
 ```
 
-对于一般组件，这样使用并没有问题，但对于全屏类的弹窗组件，如果在一个层级嵌套很深的子组件中使用，仍然通过声明式的方式，很可能它的样式会受到父元素某些 CSS 的影响导致渲染不符合预期。这类组件最好的使用方式就是挂载到 body 下，但是我们如果是声明式地把这些组件挂载到最外层，对它们的控制也非常不灵活。其实最理想的方式是动态把这类组件挂载到 body 下，createAPI 就是干这个事情的。
+对于一般组件，这样使用并没有问题，但对于全屏类的弹窗组件，如果在一个层级嵌套很深的子组件中使用，仍然通过声明式的方式，很可能它的样式会受到父元素某些 CSS 的影响导致渲染不符合预期。这类组件最好的使用方式就是挂载到 body 下，但是我们如果是声明式地把这些组件挂载到最外层，对它们的控制也非常不灵活。其实最理想的方式是动态把这类组件挂载到 body 下，`createAPI` 就是干这个事情的。
 我们现在就用它来做我们的订阅弹窗。
 
-cube-ui 提供了所有弹窗类组件的基类组件 Popup，如果是新增一个弹窗类组件，推荐基于 Popup 做二次开发。我们这里就是基于 Proup 封装了名为 subscribe-dialog 的弹窗组件。
-首先我们在 main.js 中通过 createAPI 创建一个 `this.$createSubscribeDialog` API，把 SubscribeDialog 变成一个 API 式调用的组件：
+cube-ui 提供了所有弹窗类组件的基类组件 Popup，如果是新增一个弹窗类组件，推荐基于 Popup 做二次开发。我们这里就是基于 Proup 封装了名为 `subscribe-dialog` 的弹窗组件。
+首先我们在 main.js 中通过 createAPI 创建一个 `this.$createSubscribeDialog` API，把 `SubscribeDialog` 变成一个 API 式调用的组件：
 
 ```js
 import SubscribeDialog from './components/subscribe-dialog/subscribe-dialog'
 createAPI(Vue, SubscribeDialog, [], true)
 ```
 
-接着我们就可以在 MatchList 组件内部通过 this.$createSubscribeDialog() 的方式调用它
+接着我们就可以在 MatchList 组件内部通过 `this.$createSubscribeDialog()` 的方式调用它
 
 ```js
 this.subscribeDialog = this.$createSubscribeDialog()
 ```
 
-当你想让这个弹窗显示，就执行 `.show()` 方法。当执行 .show 的时候，cube-ui 内部会把 SubscribeDialog 组件动态挂载到 body 下。
+当你想让这个弹窗显示，就执行 `.show()` 方法。当执行 `.show()` 的时候，cube-ui 内部会把 `SubscribeDialog` 组件动态挂载到 body 下。
 
 ![Example QR](./src/assets/p9.jpeg)
 
@@ -325,7 +325,7 @@ cube-ui 的弹出层组件部分，还包含了 Picker、TimePicker、Dialog 等
 我们希望用户在点击顶部的全部赛事后，由屏幕下方上滑出一个弹窗，供用户选择比赛类型。像这样：
 <img src="http://img.blog.csdn.net/20180312203957620?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvSG9uZXltYW8=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70" width="40%"/>
 
-这时，就可以使用 cube-ui 的 Picker 组件。用户可以通过屏幕下边上滑出的 Picker，来选择想看的比赛类型，点击确认后，如果确认值有变，则更新比赛列表。并且点击取消、确定以及 Picker 之外的地方时，都让 Picker 消失。同样，Picker 也是用 CreateAPI 创建的。此部分见 [stage-5](https://github.com/cube-ui/cube-application-guide/blob/stage-5/src/App.vue) 分支。
+这时，就可以使用 cube-ui 的 Picker 组件。用户可以通过屏幕下边上滑出的 Picker，来选择想看的比赛类型，点击确认后，如果确认值有变，则更新比赛列表。并且点击取消、确定以及 Picker 之外的地方时，都让 Picker 消失。同样，Picker 也是用 createAPI 创建的。此部分见 [stage-5](https://github.com/cube-ui/cube-application-guide/blob/stage-5/src/App.vue) 分支。
 
 ```js
 mounted () {
