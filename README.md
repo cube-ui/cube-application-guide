@@ -10,6 +10,7 @@
 ![Example](./src/assets/p10.gif)
 
 ![Example](./src/assets/qr-code.png)
+
 你可以扫码体验哦~
 ## 初始化项目
 cube-ui 为我们提供了脚手架，可以方便的迅速初始化一个 cube-ui 项目，里面有基本配置和基础代码，然后你就可以开始的使用它了。
