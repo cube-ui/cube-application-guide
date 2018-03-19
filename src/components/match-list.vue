@@ -32,25 +32,35 @@
 </template>
 
 <script>
+import { ENDED, LIVE, CONCERN } from '../common/config/tabs'
 import list from '../common/data/match-list'
 const UP = 'up'
 const DOWN = 'down'
+const typesMap = {
+  [ENDED]: 0,
+  [LIVE]: 1,
+  [CONCERN]: 2
+}
+// 处理数据
+const getMatchList = (source, type) => {
+  return list[source][typesMap[type]]
+}
 
 export default {
   name: 'match-list',
   props: {
-    type: {
+    source: {
       type: String,
       default: 'soccer'
     },
-    status: {
-      type: Number,
-      default: 1
+    type: {
+      type: String,
+      default: LIVE
     }
   },
   data () {
     return {
-      matchList: list[this.type][this.status],
+      matchList: getMatchList(this.source, this.type),
       options: {
         scrollbar: {
           fade: true
@@ -71,8 +81,8 @@ export default {
     }
   },
   watch: {
-    type () {
-      this.matchList = list[this.type][this.status]
+    source () {
+      this.matchList = getMatchList(this.source, this.type)
     }
   },
   created () {

@@ -2,17 +2,17 @@
   <div id="app">
     <div class="header">
       <h1 class="title" @click="showPicker">
-        <span>全部赛事</span>
+        <span>{{source}}赛事</span>
         <i class="cubeic-select" :class="{down: toDown}"></i>
       </h1>
       <div class="navigator">
         <ul class="nav-list">
           <li v-for="(item, index) in tabList" :key="index"
             @click="switchTab(index)" :class="{active: currentPage === index}">
-            {{ item }}
+            {{ item.txt }}
           </li>
         </ul>
-        <div class="triangle-up" :class="{left: currentPage === 0, right: currentPage === 2}"></div>
+        <i class="triangle-up" :class="{left: currentPage === 0, right: currentPage === 2}"></i>
       </div>
     </div>
     <div class="content">
@@ -25,7 +25,7 @@
         @change="slideChange">
         <cube-slide-item v-for="(item, index) in tabList" :key="index">
           <div class="match-list-wrapper">
-            <match-list :type="type" :status="index"></match-list>
+            <match-list :source="source" :type="item.type"></match-list>
           </div>
         </cube-slide-item>
         <div slot="dots"></div>
@@ -35,6 +35,7 @@
 </template>
 
 <script>
+import { ENDED, LIVE, CONCERN } from './common/config/tabs'
 import MatchList from './components/match-list'
 
 export default {
@@ -42,14 +43,27 @@ export default {
   data () {
     return {
       currentPage: 1,
-      tabList: ['已结束', '直播中', '我的关注'],
+      tabList: [
+        {
+          txt: '已结束',
+          type: ENDED
+        },
+        {
+          txt: '我的关注',
+          type: CONCERN
+        },
+        {
+          txt: '直播中',
+          type: LIVE
+        }
+      ],
       toDown: false,
       pickerList: [
         {text: 'NBA', value: 'NBA'},
         {text: 'DOTA', value: 'dota'},
         {text: 'SOCCER', value: 'soccer'}
       ],
-      type: 'soccer'
+      source: 'soccer'
     }
   },
   mounted () {
@@ -63,7 +77,7 @@ export default {
         this.toDown = false
       },
       onValueChange: (selectedVal) => {
-        this.type = selectedVal[0]
+        this.source = selectedVal[0]
       }
     })
   },
