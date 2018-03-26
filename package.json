@@ -2,7 +2,6 @@
   "name": "cube-application-guide",
   "version": "1.0.0",
   "description": "A guide for cube application",
-  "author": "AmyFoxFN <funan_amy@foxmail.com>",
   "private": true,
   "scripts": {
     "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
@@ -13,6 +12,12 @@
   "compileDependencies": [
     "cube-ui"
   ],
+  "transformModules": {
+    "cube-ui": {
+      "transform": "cube-ui/src/modules/${member}",
+      "kebabCase": true
+    }
+  },
   "dependencies": {
     "cube-ui": "^1.5.0",
     "vue": "^2.5.2"
@@ -22,7 +27,6 @@
     "babel-core": "^6.22.1",
     "babel-eslint": "^7.1.1",
     "babel-loader": "^7.1.1",
-    "babel-plugin-transform-modules": "^0.1.1",
     "babel-plugin-transform-runtime": "^6.22.0",
     "babel-preset-env": "^1.3.2",
     "babel-preset-stage-2": "^6.22.0",
@@ -63,7 +67,8 @@
     "webpack-bundle-analyzer": "^2.9.0",
     "webpack-dev-server": "^2.9.1",
     "webpack-merge": "^4.1.0",
-    "webpack-post-compile-plugin": "^0.2.1"
+    "webpack-post-compile-plugin": "^0.2.1",
+    "webpack-transform-modules-plugin": "^0.3.1"
   },
   "engines": {
     "node": ">= 4.0.0",

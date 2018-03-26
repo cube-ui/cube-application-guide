@@ -70,6 +70,7 @@ export default {
     this.picker = this.$createPicker({
       title: '赛事',
       data: [this.pickerList],
+      selectedIndex: [2],
       onSelect: () => {
         this.toDown = false
       },

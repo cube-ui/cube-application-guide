@@ -6,14 +6,6 @@
     "stage-2"
   ],
   "plugins": [
-    "transform-runtime", 
-    [
-      "transform-modules", {
-        "cube-ui": {
-          "transform": "cube-ui/src/modules/${member}",
-          "kebabCase": true
-        }
-      }
-    ]
+    "transform-runtime"
   ]
 }
