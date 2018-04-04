@@ -19,7 +19,7 @@
     }
   },
   "dependencies": {
-    "cube-ui": "^1.5.0",
+    "cube-ui": "^1.7.2",
     "vue": "^2.5.2"
   },
   "devDependencies": {
