@@ -7,7 +7,7 @@
       @pulling-down="onPullingDown"
       @pulling-up="onPullingUp">
       <ul class="match-inner">
-        <li v-for="(item, index) in matchList" :key="index" class="match-item">
+        <li v-for="(item, index) in matchList" :key="index" class="match-item" @click="clickItem(item)">
           <div class="left-team">
             <img :src="item.hostLogoUrl" alt="" class="logo">
             <p class="name">{{item.hostTeamName}}</p>
@@ -76,7 +76,8 @@ export default {
             more: '加载更多',
             noMore: '没有更多的比赛啦'
           }
-        }
+        },
+        stopPropagation: true
       }
     }
   },
@@ -89,6 +90,9 @@ export default {
     this.subscribeDialog = this.$createSubscribeDialog()
   },
   methods: {
+    clickItem (item) {
+      console.log(`click: ${item.hostTeamName} vs ${item.guestTeamName}`)
+    },
     subscribe () {
       this.subscribeDialog.show()
     },
