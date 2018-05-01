@@ -77,7 +77,7 @@ export default {
             noMore: '没有更多的比赛啦'
           }
         },
-        stopPropagation: true
+        click: false
       }
     }
   },
