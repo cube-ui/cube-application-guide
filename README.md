@@ -12,6 +12,13 @@
 ![Example](./src/assets/qr-code.png)
 
 你可以扫码体验哦~
+
+[**更多完整的实战视频教程**](https://coding.imooc.com/class/74.html)
+
+[项目演示地址](http://ustbhuangyi.com/sell/)
+
+![二维码](https://qr.api.cli.im/qr?data=http%253A%252F%252Fustbhuangyi.com%252Fsell%252F%2523%252Fgoods&level=H&transparent=false&bgcolor=%23ffffff&forecolor=%23000000&blockpixel=12&marginblock=1&logourl=&size=280&kid=cliim&key=686203a49c4613080b5b3004323ff977)
+
 ## 初始化项目
 cube-ui 为我们提供了脚手架，可以方便的迅速初始化一个 cube-ui 项目，里面有基本配置和基础代码，然后你就可以开始的使用它了。
 ```shell
